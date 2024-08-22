@@ -1,0 +1,60 @@
+
+.img{
+    background-image: url(../images/car2.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    border-radius: 0.4rem;
+}
+.container{
+  
+    margin:0;
+    padding: 0;
+    max-width: 98%;
+}
+.col-lg-6{
+    padding: 0;
+}
+.forum{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background-color: white;
+    padding-left: 35px;
+}
+
+h1,label{
+    font-family: "Oswald", sans-serif;
+   font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+input{
+   width: 20rem;
+   height: 2rem;
+   font-size: 1rem;
+   border:2px solid rgba(61, 158, 248, 0.788);
+   margin-bottom: 20px;
+   border-radius: 0.5rem;
+   outline: none;
+}
+input:hover , textarea:hover{
+    border: 2px solid green;
+}
+textarea{
+    margin-bottom: 20px;
+    border-radius: 0.8rem;
+    font-size: 1rem;
+   border:2px solid rgba(61, 158, 248, 0.788);
+   outline: none;
+}
+label{
+    font-size: 1.2rem;
+}
+h1{
+    margin-top: 5rem;
+}
+button{
+    margin-bottom: 5rem;
+}

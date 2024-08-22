@@ -1,0 +1,16 @@
+*{
+        font-family: "Halant", serif;
+        font-weight: 500;
+        font-style: normal;
+  }
+
+.flex{
+    display:flex;
+    flex-wrap: wrap;
+}
+.card{
+    margin:20px;
+}
+.card-img-top{
+    height: 15rem;
+}
