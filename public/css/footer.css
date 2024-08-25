@@ -8,11 +8,15 @@ footer{
     justify-content: center;
    
     font-size: 1.2rem;
-    position:absolute;
+   
     text-align: center;
-    width: 98%;
-    padding-bottom: 1rem;
+    width: 100%;
+    padding: 1rem;
     margin-top: 1rem;
+    position: sticky;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }
 .flexx{
 text-align: center;
