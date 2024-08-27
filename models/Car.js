@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 import validator from 'validator'; 
+import Review from "./review.js";
+
+const Schema=mongoose.Schema;
 
 const carSchema=new mongoose.Schema({
     name:{
@@ -39,6 +42,19 @@ const carSchema=new mongoose.Schema({
         required:true,
         min:[2000,"Your car is older"],
         max:[new Date().getFullYear(),"Futuristic cars not supported"],
+    },
+    reviews:[{
+        type:Schema.Types.ObjectId,
+        ref:"Review",
+    }]
+});
+
+carSchema.post("findOneAndDelete", async (car)=>  {
+ 
+    if (car.reviews.length) {
+        console.log("In post request");
+        await Review.deleteMany({ _id: { $in: car.reviews } });
+      
     }
 });
 

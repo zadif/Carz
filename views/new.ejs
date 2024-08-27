@@ -19,10 +19,11 @@
 <div class="row">
     <div class="forum col-lg-6">
         <div>
-        <h1>Add a car</h1>
+        
         <br><br><br>
   <% if (locals.car) { %>
-    <form action="/edit/<%=car._id%>" method="post" novalidate class="needs-validation">
+    <h1 class="heading">Edit a car</h1>
+    <form action="/carz/edit/<%=car._id%>" method="post" novalidate class="needs-validation">
       <div>
       <label for="name" class="form-label" >Name of car: </label>
       <input type="text" name="name" required value="<%=car.name%>" class="form-control" id="inputField">
@@ -109,8 +110,8 @@
       <button type="submit" placeholder="Submit" class="btn btn-primary">Submit</button>
       </form>
         <% } else { %>
-          
-        <form action="/new" method="post" novalidate class="needs-validation">
+          <h1 class="heading">Add a car</h1>
+        <form action="/carz/new" method="post" novalidate class="needs-validation">
       <div>
         <label for="name" class="form-label">Name of car: </label>
         <input type="text" name="name" required class="form-control" id="inputField">

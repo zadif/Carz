@@ -2,100 +2,47 @@ import express from "express";
 import mongoose from "mongoose";
 import Car from "./models/Car.js"; 
 import bodyParser from "body-parser"
-import wrapAsync from "./utils/wrapAsync.js";
 import ExpressError from "./utils/ExpressError.js";
-import carSchemaJoi from "./models/joinSchema.js";
+import Review from "./models/review.js";
+import carz from "./routes/carz.js";
+import review from "./routes/reviews.js";
+import session from "express-session";
+import flash from "connect-flash";
 
 
 const app=express();
 const port=3000;
-
-app.use(express.static('public'));
-app.use(bodyParser.urlencoded({extended:true}));
-
 main().then(()=>console.log('Connection successful'))
 .catch(error => console.log(error));
 
 async function main() {
   await mongoose.connect('mongodb://127.0.0.1:27017/Carz');
 }
-
-
-
-app.get('/',wrapAsync( async (req,res,next)=>{
-  
-    let cars=await Car.find();
-    
-    res.render('index.ejs',{cars});
-
-//    res.render('footer.ejs')
-}));
-
-app.get('/new',(req,res)=>{
-    res.render('new.ejs');
-});
-app.post('/new',wrapAsync(async (req,res,next)=>{
-    
-    //if via postman not a single thing is sent
-    if (!req.body || Object.keys(req.body).length === 0) {
-        return next(new ExpressError(400, "No data provided. Please send valid data for storing."));
+const sessionOptions={
+  secret:"Hola",
+  resave:false,
+  saveUninitialized:true,
+  cookie:{
+    httpOnly:true,
+    expires: Date.now() + 7*24*60*60*1000,
+    maxAge:7*24*60*60*1000,
     }
-//    let result= carSchemaJoi.validate(req.body);
-//    console.log(result);
-//     if(result.error){
-//         next(new ExpressError(408,result.error));
-//     }
-    let newCar=new Car({
-        name:req.body.name,
-        description:req.body.description,
-        image:req.body.image,
-        price:req.body.price,
-        country:req.body.country,
-        location:req.body.location,
-        year:req.body.year
-     });
-     
-   await newCar.save();
-    res.redirect('/');
-}));
+}
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(session(sessionOptions));
+app.use(flash());
 
-app.get('/delete/:id',wrapAsync(async (req,res,next)=>{
-    let {id}=req.params;
-
-    await Car.findByIdAndDelete(id);
-    res.redirect('/');
-}));
-
-app.get('/edit/:id',wrapAsync(async (req,res,next)=>{
-    
-    let {id}=req.params;
-    
-    let car=await Car.findById(id);
+app.use((req,res,next)=>{ //we save the flash message in locals object, after each request is sent 
  
-    res.render('new.ejs',{car});
-}));
+  res.locals.message=req.flash("success");
+  res.locals.num=req.flash("num"); //method to give different colours to different messages 1 for add 2 edit, 3 delete
+  next();
+})
 
-app.post('/edit/:id',wrapAsync(async (req,res,next)=>{
-     //if via postman not a single thing is sent
-    
-     if (!req.body || Object.keys(req.body).length === 0) {
-        return next(new ExpressError(400, "No data provided. Please send valid data for storing."));
-    }
 
-    let {id}=req.params;
-    let newCar={
-        name:req.body.name,
-        description:req.body.description,
-        image:req.body.image,
-        price:req.body.price,
-        country:req.body.country,
-        location:req.body.location,
-        year:req.body.year
-     };
-     
-   await Car.findByIdAndUpdate(id,newCar,{validations:true});
-   res.redirect('/');
-}));
+app.use("/carz",carz);
+app.use("/review",review);
 
 //if client tries to go to a certain page which doesnot exist, we first check all above route and then this statment is triggered , it is like a default statment
 app.all("*",(req,res,next)=>{

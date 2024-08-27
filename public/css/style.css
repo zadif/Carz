@@ -7,10 +7,16 @@
 .flex{
     display:flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .card{
     margin:20px;
 }
 .card-img-top{
     height: 15rem;
+    cursor: pointer;
+}
+.card-img-top:hover{
+   opacity:0.92;
+    
 }

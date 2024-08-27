@@ -51,10 +51,10 @@ textarea{
 label{
     font-size: 1.2rem;
 }
-h1{
-    margin-top: 5rem;
+.heading{
+    margin-bottom: 5rem;
 }
-button{
+.btn{
     margin-bottom: 5rem;
 }
 .form-control{

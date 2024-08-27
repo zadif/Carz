@@ -3,6 +3,8 @@ body{
 }
 .brand , .add{
     display: inline-block;
+   
+    margin-top:10px;
 }
 
 .addacar{
@@ -13,26 +15,20 @@ body{
     font-size: 1.3rem;
     font-family: "Halant", serif;
     font-weight: 500;
-        font-style: normal;
-        margin-right: 0.5rem;
+    font-style: normal;
+    margin-right: 0.5rem;
+    padding: 5px;
+    cursor:pointer;
     
 }
 .addacar:hover{
-    border:0.1px solid white;
+    
     background-color: #06278a52;
     border-radius: 8%;
-  
+ 
 }
-.brand{
-    font-family: "Dancing Script", cursive;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal;
-    font-size: 1.7rem;
-    margin-left: 1rem;
-    color:white
-}
-header{
+
+.head{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -43,9 +39,20 @@ header{
     margin:0;
     height: 3rem;
     margin-bottom: 1rem;
+    padding-bottom: 13px;
 }
 .brand1{
     border:none;
     background-color: #4169E1;
     color: white;
+    font-family: "Dancing Script", cursive;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1.7rem;
+    margin-left: 1rem;
+    color:white;
+    cursor:pointer;
+
 }
+

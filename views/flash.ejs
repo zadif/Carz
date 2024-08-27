@@ -1,0 +1,24 @@
+ <link rel="stylesheet" href="/css/flash.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+ <% if (locals.message.length>0) { %>
+    
+    <div class="alert <% if (num==1) { %>
+        alert-success
+        <% } else if(num==2) { %>
+            alert-primary
+         <% } else if(num==3) { %> 
+            alert-danger
+         <% } else{ %>
+            alert-dark
+         
+    <% } %>  alert-dismissible fade show col-6 offset-3" role="alert">
+       <%= message %>
+        <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+    
+ <% } %>
+

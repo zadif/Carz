@@ -60,4 +60,8 @@ let cars=[{
 }
 ];
 
-Car.insertMany(cars);
+function add(){
+   for(let i=0;i<5;i++)
+    Car.insertMany(cars);
+}
+add();

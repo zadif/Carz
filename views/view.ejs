@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View</title>
+    <link rel="icon" href="./images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Halant:wght@300;400;500;600;700&family=Oswald:wght@200..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/view.css">
+  </head>
+  <body>
+    <%- include('./header.ejs') %>
+    <%- include('./flash.ejs') %>
+    
+    <section class="viewflex">
+    <div class="card carcard" >
+
+        <img class="card-img-top" src="<%= car.image%>" alt="Card image cap" data-id="<%=car._id%>">
+        <div class="card-body">
+          <h5 class="card-title"><%= car.name %>  <%= car.year %></h5>
+          <p class="card-text"><%= car.description %></p>
+          <h4>Price: Rs. <%= car.price %></h4>
+          <form action="/carz/delete/<%=car._id%>" method="get">
+          <button class="btn btn-danger">Delete</button>
+          <button  class="btn btn-primary" formaction="/carz/edit/<%=car._id%>">Edit</button>
+        </form>
+        </div>
+      </div>
+
+    </section>
+    <br><hr><br>
+    <section class="review viewflex">
+     <form action="/review/<%=car._id%>" method="post" novalidate class="needs-validation">
+      <h3 class="mb-3">Leave a Review</h3>
+      <label for="rating" class="form-label mb-3">Rating:</label>
+      <input type="range" min="1" max="5" name="rating"  required class="form-range">
+      <br>
+      <div>
+        <label for="comment" class="form-label mb-3">Review:</label>
+      <textarea name="comment" rows="8" cols="40" class="form-control mb-3" required placeholder="I loved this car....."></textarea>
+      <div class="valid-feedback">
+        Price Looks good!
+          </div>
+          <div class="invalid-feedback">
+          Please enter a valid feedback
+        </div>
+      </div>
+      <br>
+      <button class="btn btn-success mb-3">Submit</button>
+     </form>
+     
+    </section>
+
+    <hr>
+    
+    <section class="viewflex ml-3 mr-3">
+
+      <% if (car.reviews.length>0) { %>
+
+        <div style="text-align: center;">
+          <h3 class="mr-5">All Reviews</h3>
+       <div class="cont">
+        
+        <% for( let review of car.reviews ) { %>
+         
+
+        <div class="card reviewcard" >
+          <h5 class="card-header">Featured</h5>
+          <div class="card-body">
+            <h5 class="card-title"><%= review.rating%> stars</h5>
+            <p class="card-text"><%= review.comment %></p>
+            <form action="/review/<%=car._id%>/<%=review.id%>" method="post">
+            <button  class="btn btn-danger">Delete</button>
+          </form>
+          </div>
+          
+        </div>
+      
+        <% } %>
+      </div>
+      </div>
+      <% } %>
+       
+    </section>
+    <%- include('./footer.ejs') %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/js/new.js"></script>
+  </body>
+</html>
