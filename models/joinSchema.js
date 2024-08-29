@@ -11,7 +11,8 @@ export const carSchemaJoi=Joi.object({
 });
 
 export const reviewSchemaJoi=Joi.object({
+   
     rating:Joi.number().required().min(1).max(5),
     comment:Joi.string().required(),
-    
+    author:Joi.string()
 });

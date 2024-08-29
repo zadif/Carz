@@ -10,10 +10,29 @@
             <div class="brand"><button class="brand1"><i class="fa-solid fa-car"></i> Carz</button></div>
           </form>
         
-        <form action="/carz/new" method="get">
+        <div class="headerdiv">
+          <form action="/carz/new" method="get">
             <div class="add"><button class="addacar">Add a car</button></div>
           </form>
       
+        <a class="iconlist"><i class="fa-solid fa-list" ></i></a>
+
+        </div>
     </header>
+   
     
-</section>
+      <div class="options col-2 displayhidden">
+        <% if (currUser) { %>
+          <div class="logout"><a href="/user/logout" class="link">Log out</a></div>
+          <% } else { %>
+            <div class="signup"><a href="/user/signup" class="link">Signup</a></div>
+            <div class="login"><a href="/user/login" class="link">Log in</a></div>
+        <% } %>
+        
+        
+      </div>
+    
+   
+</section>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="/js/header.js"></script>

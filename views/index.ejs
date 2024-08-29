@@ -31,10 +31,7 @@
           <h5 class="card-title"><%= car.name %>  <%= car.year %></h5>
           <p class="card-text"><%= car.description %></p>
           <h4>Price: Rs. <%= car.price %></h4>
-          <form action="/carz/delete/<%=car._id%>" method="get">
-          <button class="btn btn-danger">Delete</button>
-          <button  class="btn btn-primary" formaction="/carz/edit/<%=car._id%>">Edit</button>
-        </form>
+          
         </div>
       </div>
 

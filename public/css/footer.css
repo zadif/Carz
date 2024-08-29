@@ -23,7 +23,7 @@ text-align: center;
   display: grid;
   align-items: center;
 }
-a{
+.a{
     display: block;
     color: white;
     text-decoration: none;

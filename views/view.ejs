@@ -21,18 +21,26 @@
 
         <img class="card-img-top" src="<%= car.image%>" alt="Card image cap" data-id="<%=car._id%>">
         <div class="card-body">
+          <p>Owned by: <%= car.owner.username %></p><br>
           <h5 class="card-title"><%= car.name %>  <%= car.year %></h5>
           <p class="card-text"><%= car.description %></p>
           <h4>Price: Rs. <%= car.price %></h4>
-          <form action="/carz/delete/<%=car._id%>" method="get">
-          <button class="btn btn-danger">Delete</button>
-          <button  class="btn btn-primary" formaction="/carz/edit/<%=car._id%>">Edit</button>
-        </form>
+
+          <% if (currUser && currUser.id===car.owner.id) { %>
+
+            <form action="/carz/delete/<%=car._id%>" method="get">
+              <button class="btn btn-danger">Delete</button>
+              <button  class="btn btn-primary" formaction="/carz/edit/<%=car._id%>">Edit</button>
+            </form>
+
+          <% } %>
+          
         </div>
       </div>
 
     </section>
     <br><hr><br>
+    <% if (currUser ) { %>
     <section class="review viewflex">
      <form action="/review/<%=car._id%>" method="post" novalidate class="needs-validation">
       <h3 class="mb-3">Leave a Review</h3>
@@ -49,33 +57,40 @@
           Please enter a valid feedback
         </div>
       </div>
+     
       <br>
       <button class="btn btn-success mb-3">Submit</button>
      </form>
      
     </section>
-
-    <hr>
+    <% } %>
+    
     
     <section class="viewflex ml-3 mr-3">
 
       <% if (car.reviews.length>0) { %>
-
+        <hr>
         <div style="text-align: center;">
           <h3 class="mr-5">All Reviews</h3>
        <div class="cont">
         
         <% for( let review of car.reviews ) { %>
          
-
+          
         <div class="card reviewcard" >
           <h5 class="card-header">Featured</h5>
           <div class="card-body">
-            <h5 class="card-title"><%= review.rating%> stars</h5>
+
+            <h6 class="card-title">Review by: <%= review.author.username%> </h6>
+            <h6 class="card-title"><%= review.rating%> stars</h6>
             <p class="card-text"><%= review.comment %></p>
-            <form action="/review/<%=car._id%>/<%=review.id%>" method="post">
+            
+            
+            <% if (currUser && currUser._id.equals(review.author._id) ) { %>
+            <form action="/review/<%=car._id%>/<%=review.id%>" method="get">
             <button  class="btn btn-danger">Delete</button>
           </form>
+          <% } %>
           </div>
           
         </div>
@@ -83,6 +98,9 @@
         <% } %>
       </div>
       </div>
+      <% } else { %>
+        <hr>
+       <h2 class="mt-2 mb-4">No reviews to show for this car</h2>
       <% } %>
        
     </section>

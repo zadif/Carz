@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import validator from 'validator'; 
 import Review from "./review.js";
 
+
 const Schema=mongoose.Schema;
 
 const carSchema=new mongoose.Schema({
@@ -46,13 +47,17 @@ const carSchema=new mongoose.Schema({
     reviews:[{
         type:Schema.Types.ObjectId,
         ref:"Review",
-    }]
+    }],
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+    }
 });
 
 carSchema.post("findOneAndDelete", async (car)=>  {
  
     if (car.reviews.length) {
-        console.log("In post request");
+       
         await Review.deleteMany({ _id: { $in: car.reviews } });
       
     }

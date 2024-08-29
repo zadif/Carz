@@ -38,7 +38,7 @@ body{
     padding:0;
     margin:0;
     height: 3rem;
-    margin-bottom: 1rem;
+   
     padding-bottom: 13px;
 }
 .brand1{
@@ -56,3 +56,39 @@ body{
 
 }
 
+.headerdiv{
+    color:white;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-right:1rem;
+    font-size:1.5rem;
+}
+.iconlist{
+    cursor:pointer;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    color:white;
+}
+.link{
+    text-decoration:none;
+    color:black;
+    margin-bottom: 0.2rem;
+    font-size: 1.3rem;
+}
+.options{
+    background-color: rgba(128, 128, 128, 0.711);
+    padding:1rem;
+    display:inline-block;
+    text-align:center;
+    position:absolute;
+    right:0;
+    z-index: 2;
+    top:2;
+    border-radius:3%;
+    
+    
+}
+.displayhidden{
+    display:none;
+}
